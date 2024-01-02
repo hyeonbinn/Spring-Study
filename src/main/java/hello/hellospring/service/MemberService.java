@@ -9,7 +9,11 @@ import java.util.Optional;
 
 public class MemberService {
 
-    private MemberRepository memberRepository = new MemoryMemberRepository();
+    private MemberRepository memberRepository;
+
+    public MemberService(MemoryMemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /** 회원가입 **/
     public Long join (Member member){
