@@ -9,13 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class MemberService {
 
     private MemberRepository memberRepository;
 
-    @Autowired
-    public MemberService(MemoryMemberRepository memberRepository) {
+    public MemberService(MemoryMemberRepository memberRepository) { // 생성자를 통해 들어오고 있음. 생성자 주입.
         this.memberRepository = memberRepository;
     }
 
