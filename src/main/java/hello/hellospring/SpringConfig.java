@@ -12,30 +12,26 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private EntityManager em;
+    private MemberRepository memberRepository;
 
-    @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    @Autowired//생략 가능 (생성자 1개이므로)
+    public SpringConfig(MemberRepository memberRepository) { //Spring Data Jpa가 만들어놓은 구현체가 등록이 됨.
+        this.memberRepository = memberRepository;
     }
 
-//    private DataSource dataSource;
-//    @Autowired
-//    public SpringConfig(DataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
 
     @Bean
     public MemberService memberService(){
-        return new MemberService((MemoryMemberRepository) memberRepository());
+        return new MemberService((MemoryMemberRepository) memberRepository); //memberService에 의존관계 설정
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
 
+//    @Bean
+//    public MemberRepository memberRepository() {
+//
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource);
 //        return new JdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(em);
-    }
+//        return new JpaMemberRepository(em);
+//    }
 }
