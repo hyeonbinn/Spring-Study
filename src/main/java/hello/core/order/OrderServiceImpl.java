@@ -1,8 +1,6 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
-import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
@@ -13,7 +11,8 @@ public class OrderServiceImpl implements OrderService{
 
 
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // *이 부분을 변경하면 됨 but OCP 위반*
+    //private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    private DiscountPolicy discountPolicy; // 구체화가 아닌 추상화(인터페이스)에만 의존하도록 변경. (DIP O)
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
