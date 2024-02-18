@@ -24,4 +24,22 @@ public class SingletonTest {
         //memberService1 != memberService2
         assertThat(memberService1).isNotSameAs(memberService2);
     }
+
+    @Test
+    @DisplayName("싱글톤 패턴을 적용한 객체 사용")
+    void singletonServiceTest() {
+        // new SingletonService(); => new 사용시 오류남
+
+        SingletonService singletonService1 = SingletonService.getInstance();
+        SingletonService singletonService2 = SingletonService.getInstance();
+
+        System.out.println("singletonService1 = " + singletonService1);
+        System.out.println("singletonService2 = " + singletonService2);
+
+        assertThat(singletonService1).isSameAs(singletonService2);
+        // same : 자바 인스턴스 비교 -> 여기에서는 인스턴스 자체가 같은지 비교하는 것이므로 isSameAs 사용.
+        // equal : 자바 equals 비교
+
+    }
+
 }
