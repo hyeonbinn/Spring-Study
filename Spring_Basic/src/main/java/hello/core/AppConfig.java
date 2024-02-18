@@ -11,7 +11,9 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
+//@Configuration 제거시 CGLIB 기술 없이 순수한 AppConfig로 스프링 빈에 등록되지만, 싱글톤이 깨짐
+//즉 스프링 설정 정보는 항상 @Configuration 을 사용해야 함!
 public class AppConfig {
 
     //결과적으로 memberRepository가 3번 호출 되어야 함.
