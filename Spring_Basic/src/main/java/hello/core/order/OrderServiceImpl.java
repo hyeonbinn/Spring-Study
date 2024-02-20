@@ -9,22 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService {
 
-    private MemberRepository memberRepository;
-    private DiscountPolicy discountPolicy;
+    @Autowired private MemberRepository memberRepository;
+    @Autowired private DiscountPolicy discountPolicy;
 
-    /**생성자 주입은 스프링이 OrderServiceImpl 객체를 생성하려면, 생성자를 불러야함. 빈을 등록하면서 의존관계 주입이 같이 일어남.
-     즉 수정자 등의 주입은 생성자 주입 이후에 일어난다는 것.**/
-    @Autowired
-    public void setMemberRepository(MemberRepository memberRepository) {
-        System.out.println("memberRepository = " + memberRepository);
-        this.memberRepository = memberRepository;
-    }
-
-    @Autowired
-    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
-        System.out.println("discountPolicy = " + discountPolicy);
-        this.discountPolicy = discountPolicy;
-    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
