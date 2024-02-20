@@ -9,21 +9,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService {
 
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy;
 
-    /** 생성자 주입 : 불변, 필수 의존 관계에 사용
-     * memberRepository ,discountPolicy는 한 번 생성되면 못 바꿈. **/
-    //@Autowired : 생성자가 1개만 있으면 @Autowired를 생략 가능.
+    /**생성자 주입은 스프링이 OrderServiceImpl 객체를 생성하려면, 생성자를 불러야함. 빈을 등록하면서 의존관계 주입이 같이 일어남.
+     즉 수정자 등의 주입은 생성자 주입 이후에 일어난다는 것.**/
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        System.out.println("discountPolicy = " + discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }
+
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("1. OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
 
-    /**아래와 같이 public으로 열어놓는 수정 메서드를 만들어놓는 것은 매우 안 좋음.**/
-//    public void setDiscountPoilcy(DiscountPolicy discountPolicy) {
-//        this.discountPolicy = discountPolicy;
-//    }
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);
