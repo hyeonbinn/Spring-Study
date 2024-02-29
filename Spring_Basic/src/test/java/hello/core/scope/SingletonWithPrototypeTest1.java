@@ -47,7 +47,7 @@ public class SingletonWithPrototypeTest1 {
         }
 
         public int logic() {
-            prototypeBean.addCount();
+            prototypeBean.addCount(); //위 생성시점에 주입된 prototypeBean을 사용하는 것.
             int count = prototypeBean.getCount();
             return count;
         }
